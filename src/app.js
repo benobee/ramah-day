@@ -3,20 +3,8 @@ import Events from "./core/events";
 
 const App = {
     init () {
-        controller.init();
-        Events.on("app-loaded", () => {
-            console.log("app loaded");
-        });
-        Events.emit("app-loaded");
-    },
-    cacheDOM () {
-
-    },
-    execute () {
-
+        controller.init(Events);
     }
 };
 
-window._CustomProductViewApp = App;
-
-App.init();
+window.onload = App.init();

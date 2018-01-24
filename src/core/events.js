@@ -16,9 +16,7 @@ const Events = {
         }
 
         // send the event to all listeners
-        this.topics[ topic ].forEach((listener) => {
-            listener = listener(data || {});
-        });
+        this.topics[ topic ].forEach((listener) => listener(data || {}));
     }
 };
 

@@ -7,7 +7,7 @@
     "test": "mocha",
     "start": "webpack --progress --colors --watch",
     "watch": "./node_modules/.bin/webpack -d --watch --colors",
-    "build": "set PROD_ENV=true && set process.env='production' && webpack -p&&documentation build --output ./README.md --format md",
+    "build": "set PROD_ENV=true && webpack -p",
     "dev": "webpack-dev-server ./main.js --hot --watch --colors"
   },
   "babel": {

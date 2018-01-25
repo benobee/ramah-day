@@ -93,8 +93,7 @@ const controller = {
             message: "DONATE TODAY"
         };
 
-        return this.createDiv("top-nav-wrapper", `
-
+        return this.createElement("div", "top-nav-wrapper", `
             <div class="app__nav-top nav">
                 <h3>${labels.message}</h3>
                 <div class="app__ui-wrapper">
@@ -105,10 +104,12 @@ const controller = {
                     <div class="app__button" data-page-id="1">
                         <div class="label">${labels.page2}</div>
                         <div class="number">2</div>
+                        <div class="line"></div>
                     </div>
                     <div class="app__button" data-page-id="2">
                         <div class="label">${labels.page3}</div>
                         <div class="number">3</div>
+                        <div class="line"></div>
                     </div>
                 </div>
             </div>`);
@@ -119,7 +120,7 @@ const controller = {
             button2: "Next"
         };
 
-        return this.createDiv("bottom-nav-wrapper", `
+        return this.createElement("div", "bottom-nav-wrapper", `
             <div class="app__nav-bottom nav">
                 <div class="app__ui-wrapper">
                     <div class="app__button" data-label="prev">${labels.button1}</div>
@@ -128,8 +129,8 @@ const controller = {
             </div>
         `);
     },
-    createDiv (classNames, html) {
-        const div = document.createElement("div");
+    createElement (type, classNames, html) {
+        const div = document.createElement(type);
 
         div.classList.add("app__injected-ui");
         div.classList.add(classNames);

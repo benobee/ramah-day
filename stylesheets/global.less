@@ -43,12 +43,12 @@
     }
     .app__injected-ui.top-nav-wrapper {
         order: 1;
-        padding-bottom: 25px;
+        padding-bottom: 20px;
         border-bottom: 1px solid rgba(150, 150, 150, 0.2);
-        h3{
-        	text-align:center;
-        	font-size:18px;
-        	font-weight:600;
+        h3 {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
         }
         .app__ui-wrapper {
             justify-content: center;
@@ -60,20 +60,21 @@
                 flex-direction: column;
                 cursor: pointer;
                 margin: 1em;
-                &:nth-child(1){
-                    .number{
-                    	&:before{
-                    		display:none !important; 
-                    	}
-                    }              	
+                position: relative;
+                &:nth-child(1) {
+                    .number {
+                        &:before {
+                            display: none !important;
+                        }
+                    }
                 }
                 &.active {
                     .number {
                         color: white;
                         background: #2694AF !important;
-                        &:before{
-                        	background: #2694AF !important;
-                        }
+                    }
+                    .line{
+                        background: #2694AF !important;
                     }
                 }
                 .label {
@@ -81,7 +82,7 @@
                 }
                 .number {
                     width: 30px;
-                    background: rgba(150, 150, 150, 0.2);
+                    background: rgba(220, 220, 220, 1);
                     height: 30px;
                     display: flex;
                     align-items: center;
@@ -89,22 +90,21 @@
                     border-radius: 50%;
                     position: relative;
                     z-index: 3;
-                    order:4;
-                    &:before {
-						content: "";
-						position: absolute;
-						display:flex;
-						order:3;
-						height: 3px;
-						background: #EAEAEA;
-						width: 100%;
-						display: flex;
-						align-items: center;
-						top: 50%;
-						left: -100%;
-						transform: translate(0%, -50%);
-                    }
-
+                    order: 4;
+                }
+                .line {
+                    content: "";
+                    position: absolute;
+                    display: flex;
+                    order: 3;
+                    height: 3px;
+                    background: #EAEAEA;
+                    width: 120%;
+                    display: flex;
+                    align-items: center;
+                    top: 75%;
+                    left: -100%;
+                    transform: translate(0%, -50%);
                 }
             }
         }

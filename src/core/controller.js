@@ -2,8 +2,8 @@ const controller = {
     init (events) {
         this.events = events;
         this.cacheDOM();
+        this.injectClassNames();
         this.renderUIComponents();
-        this.container.classList.add("app__loaded");
         this.bindClickEvents();
         this.currentIndex = 0;
         this.events.on("page-change", (page) => {
@@ -40,8 +40,17 @@ const controller = {
             }
         });
 
+        console.log(this);
+
         //make the first page active
         this.events.emit("page-change", { index: 0 });
+    },
+    injectClassNames () {
+        this.formPages.forEach((page, index) => {
+            page.nodeList.forEach((node) => {
+                node.classList.add(`page-${index + 1}`, "form-page");
+            });
+        });
     },
     activatePage (formPage) {
         formPage.nodeList.forEach((nodeList) => {
@@ -130,13 +139,13 @@ const controller = {
         `);
     },
     createElement (type, classNames, html) {
-        const div = document.createElement(type);
+        const el = document.createElement(type);
 
-        div.classList.add("app__injected-ui");
-        div.classList.add(classNames);
-        div.innerHTML = html;
+        el.classList.add("app__injected-ui");
+        el.classList.add(classNames);
+        el.innerHTML = html;
 
-        return div;
+        return el;
     },
     renderUIComponents () {
         this.renderDiv("#centerContentWrap", this.topNav);

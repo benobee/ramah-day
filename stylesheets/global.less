@@ -1,3 +1,7 @@
+html{
+    background:transparent; 
+}
+
 .form-page {
     display: none;
     position: absolute;
@@ -12,9 +16,9 @@
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
-    opacity: 0;
-    visibility: hidden;
     transition: opacity 0.4s;
+    border: 6px solid #20A8FA;
+    border-radius: 8px;
     #formWrap {
         order: 2;
     }
@@ -24,22 +28,6 @@
     }
     .donationSection {
         border-top: none !important;
-    }
-
-    /* FIRST PAGE */
-    #donation1 {
-        .form-page;
-    }
-    /* SECOND PAGE */
-    .tributeSection,
-    #donation2>div.donateSlide>div>div.donationSection>div:nth-child(-n+6) {
-        .form-page;
-    }
-    /* THIRD PAGE */
-    #donation2>div.donateSlide>div>div.donationSection>div.donationSection.noBorderBot.noPaddingBot.toggleMargin,
-    #donation3,
-    .donateBtnCont {
-        .form-page;
     }
     .app__injected-ui.top-nav-wrapper {
         order: 1;

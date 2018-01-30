@@ -7,4 +7,6 @@ const App = {
     }
 };
 
-window.onload = App.init();
+window.addEventListener("load", () => {
+	App.init();
+});

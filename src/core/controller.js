@@ -7,8 +7,8 @@ const controller = {
         this.bindClickEvents();
         this.currentIndex = 0;
         this.events.on("page-change", (page) => {
+            //console.log(this.container.offsetHeight);
             this.currentIndex = Number(page.index);
-
             //handle top nav buttons
             this.topNavButtons.forEach((button, i) => {
                 button.classList.add("active");
@@ -22,9 +22,13 @@ const controller = {
             this.formPages.forEach((formPage) => {
                 this.activatePage(formPage);
             });
-            this.formPages[ page.index ].nodeList.forEach((nodeList) => {
-                nodeList.classList.add("active");
+
+            this.formPages[ page.index ].nodeList.forEach((node) => {
+                node.classList.add("active");
             });
+
+            //handle errors
+            this.errorHandling(page.index);
 
             //handle bottom
             if (page.index !== 2) {
@@ -40,10 +44,67 @@ const controller = {
             }
         });
 
-        console.log(this);
+        const button = document.getElementById("sendDonation");
+
+        button.addEventListener("click", () => {
+            this.errorHandling(2);
+        });
 
         //make the first page active
         this.events.emit("page-change", { index: 0 });
+    },
+
+    errorHandling (index) {
+        let ids = [];
+
+        this.formPages[ index ].nodeList.forEach((node) => {
+            ids = ids.concat(this.getInputIdArray(node));
+        });
+
+        this.findErrorDivs(ids);
+    },
+
+    /**
+     * run through each node list to get each input element id
+     * for error popups that are rendered in separate divs outside
+     * of container element.
+     *
+     * @param  {Array} activePageNodeList NodeList
+     */
+
+    getInputIdArray (node) {
+        let ids = this.toArray(node.querySelectorAll("input"));
+
+        ids = ids.map((item) => {
+            return item.getAttribute("id");
+        });
+
+        return ids;
+    },
+
+    /**
+     * [findErrorDivs iterate through each id to find the error
+     * div programatically. Errors divs are rendered outside parent
+     * container. ]
+     * @param  {Array} idList list of ids
+     */
+
+    findErrorDivs (idList) {
+        const errors = this.toArray(document.querySelectorAll(".error-popup.active"));
+
+        errors.forEach((node) => {
+            if (node) {
+                node.classList.remove("error-popup", "active");
+            }
+        });
+
+        idList.forEach((id) => {
+            const errorDv = document.getElementById(`${id}-errorDv`);
+
+            if (errorDv) {
+                errorDv.classList.add("error-popup", "active");
+            }
+        });
     },
     injectClassNames () {
         this.formPages.forEach((page, index) => {
@@ -148,7 +209,9 @@ const controller = {
         return el;
     },
     renderUIComponents () {
-        this.renderDiv("#centerContentWrap", this.topNav);
+        const top = document.getElementById("slideWrap");
+
+        top.parentNode.insertBefore(this.topNav, top);
         this.renderDiv("#centerContentWrap", this.bottomNav);
     },
     renderDiv (target, node) {
